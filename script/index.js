@@ -27,9 +27,9 @@ function saveByEnter() {                                    // Сохранен�
 
 function formSubmitHandler (evt) {                          // Сохранение формы
     evt.preventDefault();   // Сброс настроек кнопки Submit
-    closeEditor();
     profileName.textContent = nameInput.value;
     profileProfession.textContent = jobInput.value;
+    closeEditor();
 }
 
 
