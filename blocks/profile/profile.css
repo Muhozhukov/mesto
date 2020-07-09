@@ -7,6 +7,7 @@
 @import url(./__edit-button-image/profile__edit-button-image.css);
 @import url(./__add-button/profile__add-button.css);
 @import url(./__add-button-image/profile__add-button-image.css);
+@import url(./__info-container/profile__info-container.css);
 
 .profile {
   padding-top: 40px;
@@ -19,6 +20,6 @@
 
 @media screen and (max-width: 710px) {
   .profile {
-    flex-direction: column;
+   flex-direction: column;
   }
 }

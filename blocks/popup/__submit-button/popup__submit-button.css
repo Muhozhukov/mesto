@@ -1,4 +1,4 @@
-.modal-form__submit-button {
+.popup__submit-button {
   width: 358px;
   height: 50.15px;
   background: #000000;
@@ -13,8 +13,14 @@
   text-align: center;
   color: #FFFFFF;
   border-radius: 2px;
+  margin-bottom: 36px;
 }
-.modal-form__submit-button:hover {
+.popup__submit-button:hover {
   background-color: rgba(0, 0, 0, 0.8);
   cursor: pointer
+}
+@media screen and (max-width: 500px) {
+  .popup__submit-button {
+    max-width: 90%;
+  }
 }

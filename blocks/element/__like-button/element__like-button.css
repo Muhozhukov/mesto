@@ -2,4 +2,10 @@
   border: none;
   background-color: white;
   height: 18.13px;
+  transition: .2s;
+  outline: none;
+}
+.element__like-button:hover {
+  opacity: 0.8;
+  cursor: pointer
 }

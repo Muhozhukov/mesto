@@ -1,6 +1,7 @@
 .profile__flex-container {
   display: flex;
   position: relative;
+  align-items: center;
 }
 
 
