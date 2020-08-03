@@ -8,9 +8,10 @@
   width: 19.3px;
   transition: .2s;
   outline: none;
+  object-fit: contain;
 }
 .element__delete-button:hover {
-  opacity: 0.8;
+  opacity: 0.6;
   cursor: pointer
 }
 
