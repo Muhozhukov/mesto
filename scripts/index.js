@@ -1,7 +1,7 @@
 // Задание попапов
-const profileEditorWindow = document.querySelector('.popup_type_edit-profile');
-const addCardWindow = document.querySelector('.popup_type_edit-card');
-const imageWindow = document.querySelector('.popup_type_image');
+const profileEditorPopup = document.querySelector('.popup_type_edit-profile');
+const addCardPopup = document.querySelector('.popup_type_edit-card');
+const imagePopup = document.querySelector('.popup_type_image');
 
 // Задание кнопок открытия
 const profileEditButton = document.querySelector('.profile__edit-button');
@@ -9,20 +9,20 @@ const addCard = document.querySelector('.profile__add-button');
 const image = document.querySelector('.element__image');
 
 // Задание кнопок закрытия
-const profileEditorCloseButton = profileEditorWindow.querySelector('.popup__close-button');
-const addCardCloseButton = addCardWindow.querySelector('.popup__close-button');
-const imageCloseButton = imageWindow.querySelector('.popup__close-button');
+const profileEditorCloseButton = profileEditorPopup.querySelector('.popup__close-button');
+const addCardCloseButton = addCardPopup.querySelector('.popup__close-button');
+const imageCloseButton = imagePopup.querySelector('.popup__close-button');
 
 // Задание кнопок сохранить
-const profileEditSaveButton = profileEditorWindow.querySelector('.popup__submit-button');
-const addCardSaveButton = addCardWindow.querySelector('.popup__submit-button');
+const profileEditSaveButton = profileEditorPopup.querySelector('.popup__submit-button');
+const addCardSaveButton = addCardPopup.querySelector('.popup__submit-button');
 
 //Задание темплейта и формы карточки
 const elements = document.querySelector('.elements');
 const cardTemplate = document.querySelector('#element').content.querySelector('.element');
 
-const imageTitle = imageWindow.querySelector('.popup__image-title');
-const imageSrc = imageWindow.querySelector('.popup__image');
+const imageTitle = imagePopup.querySelector('.popup__image-title');
+const imageSrc = imagePopup.querySelector('.popup__image');
 
 const enterKey = 13;
 //Массив с карточками
@@ -54,13 +54,13 @@ const initialCards = [
 ];
 
 //Задание полей для заполнения
-const nameInput = profileEditorWindow.querySelector('.popup__input_name');
-const jobInput = profileEditorWindow.querySelector('.popup__input_profession');
+const nameInput = profileEditorPopup.querySelector('.popup__input_name');
+const jobInput = profileEditorPopup.querySelector('.popup__input_profession');
 const profileName = document.querySelector('.profile__name');
 const profileProfession = document.querySelector('.profile__profession');
 
-const cardNameInput = addCardWindow.querySelector('.popup__input_place');
-const cardImageInput = addCardWindow.querySelector('.popup__input_image-url')
+const cardNameInput = addCardPopup.querySelector('.popup__input_place');
+const cardImageInput = addCardPopup.querySelector('.popup__input_image-url')
 
 //Задание функций
 
@@ -74,14 +74,14 @@ function formSubmitHandler (evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileProfession.textContent = jobInput.value;
-  toggleModalWindow(profileEditorWindow);
+  toggleModalWindow(profileEditorPopup);
 }
 
 // Сброс настроек кнопки Submit
 function cardSubmitHandler (evt) {
   evt.preventDefault();
   renderCard({name: cardNameInput.value, link: cardImageInput.value});
-  toggleModalWindow(addCardWindow);
+  toggleModalWindow(addCardPopup);
 }
 
 //Сохранение формы по нажатию Enter
@@ -107,7 +107,7 @@ function createCard(data) {
   cardImage.addEventListener('click', () => {
     imageTitle.textContent = cardTitle.textContent;
     imageSrc.src = cardImage.src;
-    toggleModalWindow(imageWindow);
+    toggleModalWindow(imagePopup);
   })
 
   //Обработчик лайка
@@ -117,9 +117,9 @@ function createCard(data) {
 
   //Обработчик удаления
    cardDeleteButton.addEventListener('click', (e) => {
-      e.target.closest(".element").remove()
+      e.target.closest('.element').remove()
   });
-return cardElement;
+  return cardElement;
 }
 
 function renderCard(data) {
@@ -133,25 +133,25 @@ initialCards.forEach((data) => {
 
 //открытие редактора профиля
 profileEditButton.addEventListener('click', () => {
-  toggleModalWindow(profileEditorWindow);
+  toggleModalWindow(profileEditorPopup);
   nameInput.value = profileName.textContent;
   jobInput.value = profileProfession.textContent;});
 
 //открытие редактора карточки
 addCard.addEventListener('click', () => {
-  toggleModalWindow(addCardWindow);
-})
+  toggleModalWindow(addCardPopup);
+});
 
 //закрытие попапов
 profileEditorCloseButton.addEventListener('click', () => {
-  toggleModalWindow(profileEditorWindow);
+  toggleModalWindow(profileEditorPopup);
 });
 addCardCloseButton.addEventListener('click', () => {
-  toggleModalWindow(addCardWindow);
-})
+  toggleModalWindow(addCardPopup);
+});
   //закрытие попапа с картинкой
 imageCloseButton.addEventListener('click', () => {
-  toggleModalWindow(imageWindow);
+  toggleModalWindow(imagePopup);
 });
 //сохранение формы по нажатию Enter
 profileEditSaveButton.addEventListener('keydown', () => {
@@ -160,5 +160,5 @@ addCardSaveButton.addEventListener('keydown', () => {
   saveByEnter()});
 
 //Нажатие кнопки "сохранить"
-profileEditorWindow.addEventListener('submit', formSubmitHandler);
-addCardWindow.addEventListener('submit', cardSubmitHandler);
+profileEditorPopup.addEventListener('submit', formSubmitHandler);
+addCardPopup.addEventListener('submit', cardSubmitHandler);
