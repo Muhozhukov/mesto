@@ -24,7 +24,7 @@ const cardTemplate = document.querySelector('#element').content.querySelector('.
 const imageTitle = imageWindow.querySelector('.popup__image-title');
 const imageSrc = imageWindow.querySelector('.popup__image');
 
-
+const enterKey = 13;
 //Массив с карточками
 const initialCards = [
   {
@@ -53,24 +53,16 @@ const initialCards = [
   }
 ];
 
-
 //Задание полей для заполнения
-let nameInput = profileEditorWindow.querySelector('.popup__input_name');
-let jobInput = profileEditorWindow.querySelector('.popup__input_profession');
-let profileName = document.querySelector('.profile__name');
-let profileProfession = document.querySelector('.profile__profession');
+const nameInput = profileEditorWindow.querySelector('.popup__input_name');
+const jobInput = profileEditorWindow.querySelector('.popup__input_profession');
+const profileName = document.querySelector('.profile__name');
+const profileProfession = document.querySelector('.profile__profession');
 
-let cardNameInput = addCardWindow.querySelector('.popup__input_place');
-let cardImageInput = addCardWindow.querySelector('.popup__input_image-url')
-
-
-
-
-
-
+const cardNameInput = addCardWindow.querySelector('.popup__input_place');
+const cardImageInput = addCardWindow.querySelector('.popup__input_image-url')
 
 //Задание функций
-
 
 // Открытие попапов
 function toggleModalWindow(modalWindow) {
@@ -94,24 +86,18 @@ function cardSubmitHandler (evt) {
 
 //Сохранение формы по нажатию Enter
 function saveByEnter() {
-  if (e.keyCode === 13) {
+  if (e.keyCode === enterKey) {
     formSubmitHandler();
   }
 }
 //Обработка массива с карточками
-initialCards.forEach((data) => {
-  renderCard(data);
-})
-function renderCard(data) {
-  elements.prepend(createCard(data));
-}
+
 function createCard(data) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImage = cardElement.querySelector('.element__image');
   const cardTitle = cardElement.querySelector('.element__title');
   const cardLikeButton = cardElement.querySelector('.element__like-button');
   const cardDeleteButton = cardElement.querySelector('.element__delete-button');
-
 
   cardTitle.textContent = data.name;
   cardImage.src = data.link;
@@ -124,7 +110,6 @@ function createCard(data) {
     toggleModalWindow(imageWindow);
   })
 
-
   //Обработчик лайка
   cardLikeButton.addEventListener('click', () => {
       cardLikeButton.classList.toggle('element__like-button_active');
@@ -134,12 +119,15 @@ function createCard(data) {
    cardDeleteButton.addEventListener('click', (e) => {
       e.target.closest(".element").remove()
   });
-
 return cardElement;
 }
 
-
-
+function renderCard(data) {
+  elements.prepend(createCard(data));
+}
+initialCards.forEach((data) => {
+  renderCard(data);
+})
 
 //Слушатели по кнопкам
 
