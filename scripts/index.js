@@ -1,7 +1,11 @@
 // Задание попапов
 const profileEditorPopup = document.querySelector('.popup_type_edit-profile');
+const profileEditorOverlay = document.querySelector('.ererer')
+const profileEditorForm = profileEditorPopup.querySelector('.popup__form');
 const addCardPopup = document.querySelector('.popup_type_edit-card');
+const addCardOverlay = addCardPopup.querySelector('.popup')
 const imagePopup = document.querySelector('.popup_type_image');
+const imageOverlay = imagePopup.querySelector('.popup')
 
 // Задание кнопок открытия
 const profileEditButton = document.querySelector('.profile__edit-button');
@@ -65,33 +69,40 @@ const cardImageInput = addCardPopup.querySelector('.popup__input_image-url')
 //Задание функций
 
 // Открытие попапов
-function toggleModalWindow(modalWindow) {
-  modalWindow.classList.toggle('popup_opened');
+function openModalWindow(modalWindow) {
+  modalWindow.classList.add('popup_opened');
+}
+function closeModalWindow(modalWindow) {
+  modalWindow.classList.remove('popup_opened');
 }
 
 // Сброс настроек кнопки Submit
 function formSubmitHandler (evt) {
-  evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileProfession.textContent = jobInput.value;
-  toggleModalWindow(profileEditorPopup);
+  closeModalWindow(profileEditorPopup);
 }
 
 // Сброс настроек кнопки Submit
 function cardSubmitHandler (evt) {
-  evt.preventDefault();
   renderCard({name: cardNameInput.value, link: cardImageInput.value});
-  toggleModalWindow(addCardPopup);
+  closeModalWindow(addCardPopup);
 }
 
+//Закрытие попапа на Esc
+function closeByEsc(event, modalWindow) {
+  if(event.key === 'Escape') {
+    closeModalWindow(modalWindow);
+  }
+}
 //Сохранение формы по нажатию Enter
 function saveByEnter() {
-  if (e.keyCode === enterKey) {
+  if (e.key === 'Enter') {
     formSubmitHandler();
   }
 }
-//Обработка массива с карточками
 
+//Обработка массива с карточками
 function createCard(data) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImage = cardElement.querySelector('.element__image');
@@ -107,7 +118,7 @@ function createCard(data) {
   cardImage.addEventListener('click', () => {
     imageTitle.textContent = cardTitle.textContent;
     imageSrc.src = cardImage.src;
-    toggleModalWindow(imagePopup);
+    openModalWindow(imagePopup);
   })
 
   //Обработчик лайка
@@ -133,26 +144,51 @@ initialCards.forEach((data) => {
 
 //открытие редактора профиля
 profileEditButton.addEventListener('click', () => {
-  toggleModalWindow(profileEditorPopup);
+  openModalWindow(profileEditorPopup);
   nameInput.value = profileName.textContent;
   jobInput.value = profileProfession.textContent;});
 
 //открытие редактора карточки
 addCard.addEventListener('click', () => {
-  toggleModalWindow(addCardPopup);
+  openModalWindow(addCardPopup);
 });
 
 //закрытие попапов
 profileEditorCloseButton.addEventListener('click', () => {
-  toggleModalWindow(profileEditorPopup);
+  closeModalWindow(profileEditorPopup);
 });
 addCardCloseButton.addEventListener('click', () => {
-  toggleModalWindow(addCardPopup);
+  closeModalWindow(addCardPopup);
 });
-  //закрытие попапа с картинкой
 imageCloseButton.addEventListener('click', () => {
-  toggleModalWindow(imagePopup);
+  closeModalWindow(imagePopup);
 });
+//закрытие попапов на esc
+document.addEventListener('keydown', () => {
+   closeByEsc(event, profileEditorPopup)
+});
+document.addEventListener('keydown', () => {
+  closeByEsc(event, addCardPopup);
+});
+document.addEventListener('keydown', () => {
+  closeByEsc(event, imagePopup);
+});
+//закрытие по клику на оверлей
+profileEditorPopup.addEventListener('click', (evt) => {
+  if(!evt.target.closest('.popup__form')) {
+    closeModalWindow(profileEditorPopup);
+  }
+})
+addCardPopup.addEventListener('click', (evt) => {
+  if(!evt.target.closest('.popup__form')) {
+    closeModalWindow(addCardPopup);
+  }
+})
+imagePopup.addEventListener('click', (evt) => {
+  if(!evt.target.closest('.popup__image')) {
+    closeModalWindow(imagePopup);
+  }
+})
 //сохранение формы по нажатию Enter
 profileEditSaveButton.addEventListener('keydown', () => {
   saveByEnter()});

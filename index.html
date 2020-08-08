@@ -42,28 +42,40 @@
 
 
   <div class="popup popup_type_edit-profile">
-      <form class="popup__form" name="popup_edit-profile">
-        <button class="popup__close-button" type="reset">
-          <img class="popup__close-button-image" src="./images/close__icon.svg" alt="Закрыть">
-        </button>
-        <div class="popup__container">
-          <h3 class="popup__title">Редактировать профиль</h3>
-          <input class="popup__input popup__input_name" type="text" name="name" value="Жак-Ив Кусто" placeholder="Имя">
-          <input class="popup__input popup__input_profession" type="text" name="profession" value="Исследователь океана" placeholder="О себе">
-          <button class="popup__submit-button" type="submit">Сохранить</button>
-        </div>
-      </form>
+    <form class="popup__form" name="profile" novalidate>
+      <button class="popup__close-button" type="reset">
+        <img class="popup__close-button-image" src="./images/close__icon.svg" alt="Закрыть">
+      </button>
+      <div class="popup__container">
+        <h3 class="popup__title">Редактировать профиль</h3>
+        <label class="popup__lable">
+          <input id="profile-name" class="popup__input popup__input_name" type="text" name="name" minlength="2" maxlength="40" value="Жак-Ив Кусто" placeholder="Имя" autocomplete="off" required>
+          <span id="profile-name-error" class="popup__error" id="name-error">Вы пропустили это поле</span>
+        </label>
+        <label class="popup__lable">
+          <input id="profile-profession" class="popup__input popup__input_profession" type="text" name="profession" minlength="2" maxlength="400" value="Исследователь океана" placeholder="О себе" autocomplete="off" required>
+          <span id="profile-profession-error" class="popup__error" id="profession-error">Вы пропустили это поле</span>
+        </label>
+        <button class="popup__submit-button popup__submit-button_disabled" type="submit" disabled>Сохранить</button>
+      </div>
+    </form>
   </div>
   <div class="popup popup_type_edit-card">
-    <form class="popup__form" name="popup_edit-card">
+    <form class="popup__form" name="card" novalidate>
       <button class="popup__close-button" type="reset">
         <img class="popup__close-button-image" src="./images/close__icon.svg" alt="Закрыть">
       </button>
       <div class="popup__container">
         <h3 class="popup__title">Новое место</h3>
-        <input class="popup__input popup__input_place" type="text" name="name" value="" placeholder="Название">
-        <input class="popup__input popup__input_image-url" type="text" name="image" value="" placeholder="Ссылка на картинку">
-        <button class="popup__submit-button" type="submit">Сохранить</button>
+        <label class="popup__lable">
+          <input id="card-title" class="popup__input popup__input_place" type="text" name="title" minlength="1" maxlength="30" value="" placeholder="Название" autocomplete="off" required>
+          <span id="card-title-error" class="popup__error" id="title-error">Вы пропустили это поле</span>
+        </label>
+        <label class="popup__lable"></label>
+          <input id="card-url" class="popup__input popup__input_image-url" type="url" name="image" value="" placeholder="Ссылка на картинку" autocomplete="off" required>
+          <span id="card-url-error" class="popup__error" id="image-error">Вы пропустили это поле</span>
+        </label>
+        <button class="popup__submit-button popup__submit-button_disabled" type="submit" disabled>Создать</button>
       </div>
     </form>
   </div>
@@ -90,6 +102,7 @@
     </div>
   </template>
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validate.js"></script>
 </body>
 </html>
 
