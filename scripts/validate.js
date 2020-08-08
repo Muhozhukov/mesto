@@ -12,7 +12,7 @@ const formElements = {
   errorClass: 'popup__error_visible'
 }
 
-const forms = Array.from(document.querySelectorAll('.popup__form'))
+const forms = Array.from(document.querySelectorAll(formElements.formSelector))
 
 function showInputError(formElement, inputElement) {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
@@ -56,7 +56,7 @@ function setEventListeners(formElement) {
   const inputs = Array.from(formElement.querySelectorAll(formElements.inputSelector));
   const submitButton = formElement.querySelector(formElements.submitButtonSelector);
   inputs.forEach((inputElement) => {
-    inputElement.addEventListener('input', (evt) => {
+    inputElement.addEventListener('input', () => {
       checkInputValidity(formElement, inputElement);
       const isFormValid = inputs.some((inputElement) => !inputElement.validity.valid);
       checkFormValidity(isFormValid, submitButton);
@@ -64,7 +64,8 @@ function setEventListeners(formElement) {
   })
 }
 
-function enableValidation() {
+function enableValidation({formSelector, inputSelector, inputValidClass, inputErrorClass, submitButtonSelector,
+  activeButtonSelector, disabledButtonSelector, errorClass}) {
   forms.forEach((formElement) => {
     formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
@@ -72,4 +73,4 @@ function enableValidation() {
     setEventListeners(formElement);
   });
 }
-enableValidation();
+enableValidation(formElements);

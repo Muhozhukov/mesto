@@ -28,35 +28,6 @@ const cardTemplate = document.querySelector('#element').content.querySelector('.
 const imageTitle = imagePopup.querySelector('.popup__image-title');
 const imageSrc = imagePopup.querySelector('.popup__image');
 
-const enterKey = 13;
-//Массив с карточками
-const initialCards = [
-  {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 //Задание полей для заполнения
 const nameInput = profileEditorPopup.querySelector('.popup__input_name');
 const jobInput = profileEditorPopup.querySelector('.popup__input_profession');
@@ -91,7 +62,7 @@ function cardSubmitHandler (evt) {
 
 //Закрытие попапа на Esc
 function closeByEsc(event, modalWindow) {
-  if(event.key === 'Escape') {
+  if(event.key === 'Escape' && modalWindow.classList.contains('popup_opened')) {
     closeModalWindow(modalWindow);
   }
 }
@@ -151,6 +122,8 @@ profileEditButton.addEventListener('click', () => {
 //открытие редактора карточки
 addCard.addEventListener('click', () => {
   openModalWindow(addCardPopup);
+  addCardSaveButton.classList.add('popup__submit-button_disabled');
+  addCardSaveButton.disabled = true;
 });
 
 //закрытие попапов
@@ -164,13 +137,13 @@ imageCloseButton.addEventListener('click', () => {
   closeModalWindow(imagePopup);
 });
 //закрытие попапов на esc
-document.addEventListener('keydown', () => {
-   closeByEsc(event, profileEditorPopup)
+document.addEventListener('keydown', (event) => {
+   closeByEsc(event, profileEditorPopup);
 });
-document.addEventListener('keydown', () => {
+document.addEventListener('keydown', (event) => {
   closeByEsc(event, addCardPopup);
 });
-document.addEventListener('keydown', () => {
+document.addEventListener('keydown', (event) => {
   closeByEsc(event, imagePopup);
 });
 //закрытие по клику на оверлей
