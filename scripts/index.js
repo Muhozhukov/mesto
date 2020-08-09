@@ -138,13 +138,19 @@ imageCloseButton.addEventListener('click', () => {
 });
 //закрытие попапов на esc
 document.addEventListener('keydown', (event) => {
-   closeByEsc(event, profileEditorPopup);
+  if (profileEditorPopup.classList.contains('popup_opened')) {
+    closeByEsc(event, profileEditorPopup);
+  }
 });
 document.addEventListener('keydown', (event) => {
-  closeByEsc(event, addCardPopup);
+  if (addCardPopup.classList.contains('popup_opened')) {
+    closeByEsc(event, addCardPopup);
+  }
 });
 document.addEventListener('keydown', (event) => {
-  closeByEsc(event, imagePopup);
+  if (imagePopup.classList.contains('popup_opened')) {
+    closeByEsc(event, imagePopup);
+  }
 });
 //закрытие по клику на оверлей
 profileEditorPopup.addEventListener('click', (evt) => {
