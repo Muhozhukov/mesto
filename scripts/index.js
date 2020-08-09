@@ -38,7 +38,6 @@ const cardNameInput = addCardPopup.querySelector('.popup__input_place');
 const cardImageInput = addCardPopup.querySelector('.popup__input_image-url')
 
 //Задание функций
-
 // Открытие попапов
 function openModalWindow(modalWindow) {
   modalWindow.classList.add('popup_opened');
@@ -160,7 +159,6 @@ addCardCloseButton.addEventListener('click', () => {
 imageCloseButton.addEventListener('click', () => {
   closeModalWindow(imagePopup);
 });
-
 //закрытие по клику на оверлей
 profileEditorPopup.addEventListener('click', (evt) => {
   if(!evt.target.closest('.popup__form')) {
