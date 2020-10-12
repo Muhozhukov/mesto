@@ -1,16 +1,14 @@
+import {initialCards, Card} from './card.js';
+import {data, FormValidator} from './validate.js';
+
 // Задание попапов
 const profileEditorPopup = document.querySelector('.popup_type_edit-profile');
-const profileEditorOverlay = document.querySelector('.ererer')
-const profileEditorForm = profileEditorPopup.querySelector('.popup__form');
 const addCardPopup = document.querySelector('.popup_type_edit-card');
-const addCardOverlay = addCardPopup.querySelector('.popup')
 const imagePopup = document.querySelector('.popup_type_image');
-const imageOverlay = imagePopup.querySelector('.popup')
 
 // Задание кнопок открытия
 const profileEditButton = document.querySelector('.profile__edit-button');
 const addCard = document.querySelector('.profile__add-button');
-const image = document.querySelector('.element__image');
 
 // Задание кнопок закрытия
 const profileEditorCloseButton = profileEditorPopup.querySelector('.popup__close-button');
@@ -23,10 +21,6 @@ const addCardSaveButton = addCardPopup.querySelector('.popup__submit-button');
 
 //Задание темплейта и формы карточки
 const elements = document.querySelector('.elements');
-const cardTemplate = document.querySelector('#element').content.querySelector('.element');
-
-const imageTitle = imagePopup.querySelector('.popup__image-title');
-const imageSrc = imagePopup.querySelector('.popup__image');
 
 //Задание полей для заполнения
 const nameInput = profileEditorPopup.querySelector('.popup__input_name');
@@ -55,7 +49,8 @@ function formSubmitHandler (evt) {
 
 // Сброс настроек кнопки Submit
 function cardSubmitHandler (evt) {
-  renderCard({name: cardNameInput.value, link: cardImageInput.value});
+  //generateCard({name: cardNameInput.value, link: cardImageInput.value});
+  addCardF();
   closeModalWindow(addCardPopup);
 }
 
@@ -91,47 +86,6 @@ function saveByEnter() {
   }
 }
 
-//Обработка массива с карточками
-function createCard(data) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImage = cardElement.querySelector('.element__image');
-  const cardTitle = cardElement.querySelector('.element__title');
-  const cardLikeButton = cardElement.querySelector('.element__like-button');
-  const cardDeleteButton = cardElement.querySelector('.element__delete-button');
-
-  cardTitle.textContent = data.name;
-  cardImage.src = data.link;
-  cardImage.alt = data.name;
-
-  //открытие попапа с картинкой
-  cardImage.addEventListener('click', () => {
-    imageTitle.textContent = cardTitle.textContent;
-    imageSrc.src = cardImage.src;
-    openModalWindow(imagePopup);
-    document.addEventListener('keydown', closeImageByEsc);
-  })
-
-  //Обработчик лайка
-  cardLikeButton.addEventListener('click', () => {
-      cardLikeButton.classList.toggle('element__like-button_active');
-  });
-
-  //Обработчик удаления
-   cardDeleteButton.addEventListener('click', (e) => {
-      e.target.closest('.element').remove()
-  });
-  return cardElement;
-}
-
-function renderCard(data) {
-  elements.prepend(createCard(data));
-}
-initialCards.forEach((data) => {
-  renderCard(data);
-})
-
-//Слушатели по кнопкам
-
 //открытие редактора профиля
 profileEditButton.addEventListener('click', () => {
   openModalWindow(profileEditorPopup);
@@ -139,7 +93,6 @@ profileEditButton.addEventListener('click', () => {
   jobInput.value = profileProfession.textContent;
   document.addEventListener('keydown', closeProfileEditor);
 });
-
 
 //открытие редактора карточки
 addCard.addEventListener('click', () => {
@@ -184,3 +137,28 @@ addCardSaveButton.addEventListener('keydown', () => {
 //Нажатие кнопки "сохранить"
 profileEditorPopup.addEventListener('submit', formSubmitHandler);
 addCardPopup.addEventListener('submit', cardSubmitHandler);
+
+//Создание карточек
+const prependTask = (element) =>{
+  elements.prepend(element);
+}
+initialCards.forEach((data) => {
+  const card = new Card(data, '#element');
+  const cardElement = card.generateCard();
+  elements.prepend(cardElement);
+});
+
+const addCardF = (event)=>{
+  data.name = cardNameInput.value;
+  data.link = cardImageInput.value;
+  const card = new Card(data, '#element');
+  const cardElement = card.generateCard();
+  prependTask(cardElement);
+}
+
+//Валидация форм
+const formProfileValidator = new FormValidator(data.formProfileSelector, data);
+formProfileValidator.enableValidation()
+
+const formCardValidator = new FormValidator(data.formCardSelector, data);
+formCardValidator.enableValidation()

@@ -15,26 +15,26 @@
 
   <main class="page__container">
     <section class="profile">
-    <div class="profile__flex-container">
-      <img src="./images/profile__avatar.jpg" alt="Аватар профиля" class="profile__image">
-      <div class="profile__info-container">
-        <div class="profile__info">
-          <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <p class="profile__profession">Исследователь океана</p>
+      <div class="profile__flex-container">
+        <img src="./images/profile__avatar.jpg" alt="Аватар профиля" class="profile__image">
+        <div class="profile__info-container">
+          <div class="profile__info">
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <p class="profile__profession">Исследователь океана</p>
+          </div>
+          <button class="profile__edit-button" type="button">
+            <img src="./images/edit__button.svg" alt="Редактировать" class="profile__edit-button-image">
+          </button>
         </div>
-        <button class="profile__edit-button" type="button">
-          <img src="./images/edit__button.svg" alt="Редактировать" class="profile__edit-button-image">
-        </button>
       </div>
-    </div>
-    <button class="profile__add-button" type="button">
-      <img src="./images/add__button.svg" alt="Добавить" class="profile__add-button-image">
-    </button>
-  </section>
+      <button class="profile__add-button" type="button">
+        <img src="./images/add__button.svg" alt="Добавить" class="profile__add-button-image">
+      </button>
+    </section>
 
-  <section class="elements">
+    <section class="elements">
 
-  </section>
+    </section>
   </main>
   <footer class="footer">
     <p class="footer__copyright">&#169; 2020 Mesto Russia</p>
@@ -42,7 +42,7 @@
 
 
   <div class="popup popup_type_edit-profile">
-    <form class="popup__form" name="profile" novalidate>
+    <form class="popup__form popup__form_profile" name="profile" novalidate>
       <button class="popup__close-button" type="reset">
         <img class="popup__close-button-image" src="./images/close__icon.svg" alt="Закрыть">
       </button>
@@ -61,7 +61,7 @@
     </form>
   </div>
   <div class="popup popup_type_edit-card">
-    <form class="popup__form" name="card" novalidate>
+    <form class="popup__form popup__form_card" name="card" novalidate>
       <button class="popup__close-button" type="reset">
         <img class="popup__close-button-image" src="./images/close__icon.svg" alt="Закрыть">
       </button>
@@ -101,9 +101,7 @@
       </div>
     </div>
   </template>
-  <script src="./scripts/initial-cards.js"></script>
-  <script src="./scripts/index.js"></script>
-  <script src="./scripts/validate.js"></script>
+  <script type="module" src="./scripts/index.js"></script>
 </body>
 </html>
 
