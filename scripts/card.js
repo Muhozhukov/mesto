@@ -1,3 +1,4 @@
+import {openModalWindow, closeModalWindow} from './index.js';
 //Массив с карточками
 export const initialCards = [
   {
@@ -41,16 +42,9 @@ export class Card {
     return cardElement;
   }
 
-
-  _handleOpenPopup(modalWindow) {
-    modalWindow.classList.add('popup_opened');
-  }
-  _handleClosePopup(modalWindow) {
-    modalWindow.classList.remove('popup_opened');
-  }
   _closeByEsc(event, modalWindow) {
     if(event.key === 'Escape' && modalWindow.classList.contains('popup_opened')) {
-      this._handleClosePopup(modalWindow);
+      closeModalWindow(modalWindow);
       document.removeEventListener('keydown', this._closeByEsc);
     }
   }
@@ -63,13 +57,14 @@ export class Card {
     this._element.querySelector('.element__image').addEventListener('click', () => {
       imageTitle.textContent = this._title;
       imageSrc.src = this._link;
-      this._handleOpenPopup(imagePopup);
+      openModalWindow(imagePopup);
       document.addEventListener('keydown', () => {
         this._closeByEsc(event, imagePopup);
     })})
     //Обработчик лайка
-    this._element.querySelector('.element__like-button').addEventListener('click', () => {
-      this._element.querySelector('.element__like-button').classList.toggle('element__like-button_active');
+    const elementLike = this._element.querySelector('.element__like-button');
+    elementLike.addEventListener('click', () => {
+      elementLike.classList.toggle('element__like-button_active');
     });
 
     //Обработчик удаления
@@ -79,9 +74,10 @@ export class Card {
   }
   generateCard() {
     this._element = this._getTemplate();
+    const elementImage = this._element.querySelector('.element__image');
     this._setEventListeners();
-    this._element.querySelector('.element__image').src = this._link;
-    this._element.querySelector('.element__image').alt = this._title;
+    elementImage.src = this._link;
+    elementImage.alt = this._title;
     this._element.querySelector('.element__title').textContent = this._title;
     return this._element;
   }
