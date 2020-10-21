@@ -1,4 +1,5 @@
 import {openModalWindow, closeModalWindow} from './index.js';
+import {closeByEsc} from './index.js';
 //Массив с карточками
 export const initialCards = [
   {
@@ -42,12 +43,6 @@ export class Card {
     return cardElement;
   }
 
-  _closeByEsc(event, modalWindow) {
-    if(event.key === 'Escape' && modalWindow.classList.contains('popup_opened')) {
-      closeModalWindow(modalWindow);
-      document.removeEventListener('keydown', this._closeByEsc);
-    }
-  }
   _setEventListeners() {
     const imagePopup = document.querySelector('.popup_type_image');
     const imageTitle = imagePopup.querySelector('.popup__image-title');
@@ -59,7 +54,7 @@ export class Card {
       imageSrc.src = this._link;
       openModalWindow(imagePopup);
       document.addEventListener('keydown', () => {
-        this._closeByEsc(event, imagePopup);
+        closeByEsc(event, imagePopup);
     })})
     //Обработчик лайка
     const elementLike = this._element.querySelector('.element__like-button');
