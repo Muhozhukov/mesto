@@ -62,11 +62,10 @@ function cardSubmitHandler (evt) {
 }
 
 //Закрытие попапа на Esc
-function closeByEsc(event, modalWindow) {
+export function closeByEsc(event, modalWindow) {
   if(event.key === 'Escape') {
     closeModalWindow(modalWindow);
     document.removeEventListener('keyup', closeByEsc);
-    console.log('123');
   }
 }
 
