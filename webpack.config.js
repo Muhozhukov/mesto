@@ -9,10 +9,6 @@ module.exports = {
     publicPath: '/',
     filename: 'main.js'
   },
-  //devtool: 'inline-source-map',
-  // devServer: {
-  //   contentBase: './dist',
-  // },
   module: {
     rules: [
       {
