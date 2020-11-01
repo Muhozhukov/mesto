@@ -7,19 +7,16 @@ export default class UserInfo {
   constructor({ profileName, profileDescription, formSelector}) {
     this._profileName = profileName;
     this._profileDescription = profileDescription;
-    this._formSelector = formSelector;
   }
   getUserInfo() {
-    this._inputList = this._formSelector.querySelectorAll('.popup__input');
-
+    const data = {
+      name: this._profileName.textContent,
+      profession: this._profileDescription.textContent
+    }
+    return data;
   }
-  setUserInfo() {
-    this._inputList = this._formSelector.querySelectorAll('.popup__input');
-    this._formValues = {};
-    this._inputList.forEach(input => {this._formValues[input.name] = input.value});
-
-    return this._formValues;
-    profileName.textContent = nameInput.value;
-    profileProfession.textContent = jobInput.value;
+  setUserInfo(item) {
+    this._profileName.textContent = item.name;
+    this._profileDescription.textContent = item.profession;
   }
 }
