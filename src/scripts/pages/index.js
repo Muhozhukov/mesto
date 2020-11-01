@@ -61,7 +61,8 @@ const addCardForm = new PopupWithForm(
   {formSubmitHandler: (item) => {
     const card = new Card(item, '#element', {handleCardClick: () => {
       const popupImg = new PopupWithImage(item, imagePopup)
-      popupImg.openPopup() ;
+      popupImg.openPopup();
+      popupImg.setEventListeners()
     }})
     const cardElement = card.generateCard();
     cardList.addItem(cardElement);
