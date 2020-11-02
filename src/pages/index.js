@@ -1,7 +1,6 @@
-import '../../page/index.css'
-
+import './index.css'
 import {Card} from '../components/Card.js';
-import {FormValidator} from '../components/validate.js';
+import {FormValidator} from '../components/FormValidator.js';
 import {
   profileEditorPopup,
   addCardPopup,
@@ -14,12 +13,14 @@ import {
   profileName,
   profileProfession,
   initialCards,
-  validateData
+  validateData,
+  addCardSaveButton
 } from '../utils/utils.js';
 import UserInfo from '../components/UsefInfo.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+// import { pop } from 'core-js/fn/array';
 
 //открытие редактора профиля
 profileEditButton.addEventListener('click', () => {
@@ -32,23 +33,28 @@ profileEditButton.addEventListener('click', () => {
 
 //открытие редактора карточки
 addCard.addEventListener('click', () => {
+  formCardValidator.disableSubmitButton(addCardSaveButton);
   addCardForm.openPopup();
 });
+
+//Инициализация попапа с картинкой
+const popupImg = new PopupWithImage(imagePopup);
+popupImg.setEventListeners();
+
+const card = (item) => {
+  const card = new Card(
+    item, '#element', {handleCardClick: () => {
+      popupImg.openPopup(item);
+    }});
+    const cardElement = card.generateCard();
+    cardList.addItem(cardElement)
+}
 
 //Инициализация карточек
 const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card(
-      item, '#element', {handleCardClick: () => {
-        const popupImg = new PopupWithImage(item, imagePopup)
-        popupImg.openPopup();
-        popupImg.setEventListeners();
-      }}
-    );
-    const cardElement = card.generateCard();
-
-    cardList.addItem(cardElement)
+    card(item)
   },
 }, elements);
 
@@ -59,13 +65,7 @@ cardList.renderItems()
 const addCardForm = new PopupWithForm(
   addCardPopup,
   {formSubmitHandler: (item) => {
-    const card = new Card(item, '#element', {handleCardClick: () => {
-      const popupImg = new PopupWithImage(item, imagePopup)
-      popupImg.openPopup();
-      popupImg.setEventListeners()
-    }})
-    const cardElement = card.generateCard();
-    cardList.addItem(cardElement);
+    card(item);
   }
 }
 );

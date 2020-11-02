@@ -1,5 +1,5 @@
 import Popup from './Popup.js'
-import {validateData} from '../utils/utils.js'
+
 export default class PopupWithForm extends Popup {
   constructor(popupSelector, {formSubmitHandler}) {
     super(popupSelector);
@@ -16,7 +16,6 @@ export default class PopupWithForm extends Popup {
     this._popupSelector.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._formSubmitHandler(this._getInputValues());
-      this._popupSelector.querySelector('.popup__form').reset();
       this.closePopup()
     })
     super.setEventListeners();

@@ -5,14 +5,12 @@ const imageSrc = imagePopup.querySelector('.popup__image');
 
 
 export default class PopupWithImage extends Popup {
-  constructor(data, popupSelector) {
+  constructor(popupSelector) {
     super(popupSelector)
-    this._title = data.name;
-    this._link = data.link;
   }
-  openPopup() {
-    imageTitle.textContent = this._title;
-    imageSrc.src = this._link;
+  openPopup(item) {
+    imageTitle.textContent = item.name;
+    imageSrc.src = item.link;
     super.openPopup();
   }
 }
