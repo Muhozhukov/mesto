@@ -12,14 +12,16 @@ import {
   jobInput,
   profileName,
   profileProfession,
-  initialCards,
+  profileAvatar,
   validateData,
-  addCardSaveButton
+  addCardSaveButton,
+  profileAvater
 } from '../utils/utils.js';
 import UserInfo from '../components/UsefInfo.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import Api from '../components/Api.js'
 // import { pop } from 'core-js/fn/array';
 
 //открытие редактора профиля
@@ -50,22 +52,35 @@ const card = (item) => {
     cardList.addItem(cardElement)
 }
 
+
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-17',
+  headers: {
+    authorization: 'de61a249-d226-492b-a95f-5f9f0d2e5b0c',
+    'Content-Type': 'application/json'
+  }
+});
+
+//Загрузка карточек с сервера
+api.getInitialCards().then((items) => cardList.renderItems(items))
+//Загрузка информации профиля с сервера
+api.getUserInfo().then((userInf) => userInfo.setUserInfo(userInf))
+
+
 //Инициализация карточек
 const cardList = new Section({
-  items: initialCards,
+  //items: initialCards,
   renderer: (item) => {
     card(item)
   },
 }, elements);
 
-//Отрисовка карточек
-cardList.renderItems()
-
 //Инициализация формы добавления карточек
 const addCardForm = new PopupWithForm(
   addCardPopup,
   {formSubmitHandler: (item) => {
-    card(item);
+    api.postNewCard(item).then((item) => card(item));
   }
 }
 );
@@ -75,7 +90,7 @@ addCardForm.setEventListeners();
 const editProfileForm = new PopupWithForm(
   profileEditorPopup,
   {formSubmitHandler: (item) => {
-    userInfo.setUserInfo(item);
+    api.editUserInfo(item).then((item) => userInfo.setUserInfo(item))
   }}
 )
 editProfileForm.setEventListeners();
@@ -83,6 +98,7 @@ editProfileForm.setEventListeners();
 const userInfo = new UserInfo({
   profileName: profileName,
   profileDescription: profileProfession,
+  profileAvatar: profileAvatar
 })
 
 //Валидация форм

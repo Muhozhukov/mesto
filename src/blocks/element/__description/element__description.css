@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   background-color: white;
-  /* min-height: 79px; */
+  max-height: 79px;
   padding: 0 15px 0 21px;
   /* border-radius: 0px 0px 10px 10px; */
 }

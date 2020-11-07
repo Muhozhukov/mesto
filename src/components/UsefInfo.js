@@ -4,9 +4,10 @@
 // export const profileProfession = document.querySelector('.profile__profession');
 
 export default class UserInfo {
-  constructor({ profileName, profileDescription, formSelector}) {
+  constructor({ profileName, profileDescription, profileAvatar }) {
     this._profileName = profileName;
     this._profileDescription = profileDescription;
+    this._profileAvatar = profileAvatar;
   }
   getUserInfo() {
     const data = {
@@ -17,6 +18,7 @@ export default class UserInfo {
   }
   setUserInfo(item) {
     this._profileName.textContent = item.name;
-    this._profileDescription.textContent = item.profession;
+    this._profileDescription.textContent = item.about;
+    this._profileAvatar.src = item.avatar;
   }
 }

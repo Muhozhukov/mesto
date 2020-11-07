@@ -24,6 +24,7 @@ export const nameInput = profileEditorPopup.querySelector('.popup__input_name');
 export const jobInput = profileEditorPopup.querySelector('.popup__input_profession');
 export const profileName = document.querySelector('.profile__name');
 export const profileProfession = document.querySelector('.profile__profession');
+export const profileAvatar = document.querySelector('.profile__image');
 
 export const cardNameInput = addCardPopup.querySelector('.popup__input_place');
 export const cardImageInput = addCardPopup.querySelector('.popup__input_image-url')
