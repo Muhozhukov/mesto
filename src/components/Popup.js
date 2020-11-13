@@ -1,7 +1,7 @@
 export default class Popup {
   constructor(popupSelector) {
     this._popupSelector = popupSelector;
-    this.escClose = this._handleEscClose.bind(this)
+    this.escClose = this._handleEscClose.bind(this);
   }
   _handleEscClose() {
     if(event.key === 'Escape') {
@@ -13,7 +13,7 @@ export default class Popup {
     .querySelector('.popup__close-button')
     .addEventListener('click', this.closePopup.bind(this));
     this._popupSelector.addEventListener('click', (evt) => {
-      if(!evt.target.closest('.popup__form')) {
+      if(!evt.target.closest('.popup__cantainer')) {
         this.closePopup();
       }
     })

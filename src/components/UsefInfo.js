@@ -1,8 +1,3 @@
-// export const nameInput = profileEditorPopup.querySelector('.popup__input_name');
-// export const jobInput = profileEditorPopup.querySelector('.popup__input_profession');
-// export const profileName = document.querySelector('.profile__name');
-// export const profileProfession = document.querySelector('.profile__profession');
-
 export default class UserInfo {
   constructor({ profileName, profileDescription, profileAvatar }) {
     this._profileName = profileName;
@@ -19,6 +14,7 @@ export default class UserInfo {
   setUserInfo(item) {
     this._profileName.textContent = item.name;
     this._profileDescription.textContent = item.about;
-    this._profileAvatar.src = item.avatar;
+    // this._profileAvatar.src = item.avatar;
+    this._profileAvatar.style.backgroundImage = `url(${item.avatar})`;
   }
 }

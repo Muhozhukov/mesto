@@ -2,10 +2,13 @@
 export const profileEditorPopup = document.querySelector('.popup_type_edit-profile');
 export const addCardPopup = document.querySelector('.popup_type_edit-card');
 export const imagePopup = document.querySelector('.popup_type_image');
+export const deleteImagePopup = document.querySelector('.popup_type_delete-image');
+export const avatarEditPopup = document.querySelector('.popup_type_edit-avatar');
 
 // Задание кнопок открытия
 export const profileEditButton = document.querySelector('.profile__edit-button');
 export const addCard = document.querySelector('.profile__add-button');
+export const editAvatar = document.querySelector('.profile__edit-avatar-button-container');
 
 // Задание кнопок закрытия
 export const profileEditorCloseButton = profileEditorPopup.querySelector('.popup__close-button');
@@ -15,6 +18,7 @@ export const imageCloseButton = imagePopup.querySelector('.popup__close-button')
 // Задание кнопок сохранить
 export const profileEditSaveButton = profileEditorPopup.querySelector('.popup__submit-button');
 export const addCardSaveButton = addCardPopup.querySelector('.popup__submit-button');
+export const editAvatarSaveButton = avatarEditPopup.querySelector('.popup__submit-button')
 
 //Задание темплейта и формы карточки
 export const elements = '.elements';
@@ -24,7 +28,8 @@ export const nameInput = profileEditorPopup.querySelector('.popup__input_name');
 export const jobInput = profileEditorPopup.querySelector('.popup__input_profession');
 export const profileName = document.querySelector('.profile__name');
 export const profileProfession = document.querySelector('.profile__profession');
-export const profileAvatar = document.querySelector('.profile__image');
+//export const profileAvatar = document.querySelector('.profile__image');
+export const profileAvatar = document.querySelector('.profile__image-container');
 
 export const cardNameInput = addCardPopup.querySelector('.popup__input_place');
 export const cardImageInput = addCardPopup.querySelector('.popup__input_image-url')

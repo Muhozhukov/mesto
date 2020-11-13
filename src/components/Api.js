@@ -68,6 +68,74 @@ export default class Api {
     })
     .then((data) => {
       return data
+      console.log(data)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+  likeToCard(cardId) {
+    return fetch(`${this.baseUrl}/cards/likes/${cardId}`, {
+      method: 'PUT',
+      headers: this.headers
+    })
+    .then((res) => {
+      if(res.ok) {return res.json()}
+      return Promise.reject(`Ошибка: ${res.status}`);
+    })
+    .then((data) => {
+      return data
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+  deleteLikeToCard(cardId) {
+    return fetch(`${this.baseUrl}/cards/likes/${cardId}`, {
+      method: 'DELETE',
+      headers: this.headers
+    })
+    .then((res) => {
+      if(res.ok) {return res.json()}
+      return Promise.reject(`Ошибка: ${res.status}`);
+    })
+    .then((data) => {
+      return data
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+  deleteCard(cardId) {
+    return fetch(`${this.baseUrl}/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: this.headers
+    })
+    .then((res) => {
+      if(res.ok) {return res.json()}
+      return Promise.reject(`Ошибка: ${res.status}`);
+    })
+    .then((data) => {
+      return data
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+  changeProfileAvatar(newAvatar) {
+    return fetch(`${this.baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this.headers,
+      body: JSON.stringify({
+        avatar: newAvatar.avatar
+      })
+    })
+    .then((res) => {
+      if(res.ok) {return res.json()}
+      return Promise.reject(`Ошибка: ${res.status}`);
+    })
+    .then((data) => {
+      return data
     })
     .catch((err) => {
       console.log(err)

@@ -15,7 +15,11 @@
   <main class="page__container">
     <section class="profile">
       <div class="profile__flex-container">
-        <img src="./images/profile__avatar.jpg" alt="Аватар профиля" class="profile__image">
+        <div class="profile__image-container">
+          <div class="profile__edit-avatar-button-container">
+            <button class="profile__edit-avatar-button"></button>
+          </div>
+        </div>
         <div class="profile__info-container">
           <div class="profile__info">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -41,7 +45,7 @@
 
 
   <div class="popup popup_type_edit-profile">
-    <form class="popup__form popup__form_profile" name="profile" novalidate>
+    <form class="popup__form popup__cantainer popup__form_profile" name="profile" novalidate>
       <button class="popup__close-button" type="reset">
         <img class="popup__close-button-image" src="./images/close__icon.svg" alt="Закрыть">
       </button>
@@ -60,7 +64,7 @@
     </form>
   </div>
   <div class="popup popup_type_edit-card">
-    <form class="popup__form popup__form_card" name="card" novalidate>
+    <form class="popup__form popup__cantainer popup__form_card" name="card" novalidate>
       <button class="popup__close-button" type="reset">
         <img class="popup__close-button-image" src="./images/close__icon.svg" alt="Закрыть">
       </button>
@@ -78,8 +82,23 @@
       </div>
     </form>
   </div>
+  <div class="popup popup_type_edit-avatar">
+    <form class="popup__form popup__cantainer popup__form_avatar" name="avatar" novalidate>
+      <button class="popup__close-button" type="reset">
+        <img class="popup__close-button-image" src="./images/close__icon.svg" alt="Закрыть">
+      </button>
+      <div class="popup__container">
+        <h3 class="popup__title">Обновить аватар</h3>
+        <label class="popup__lable">
+          <input id="card-title" class="popup__input popup__input_place" type="url" name="avatar" minlength="1" value="" placeholder="Ссылка на изображение" autocomplete="off" required>
+          <span id="card-title-error" class="popup__error" id="title-error">Вы пропустили это поле</span>
+        </label>
+        <button class="popup__submit-button popup__submit-button_disabled" type="submit" disabled>Сохранить</button>
+      </div>
+    </form>
+  </div>
   <div class="popup popup_type_image">
-    <div class="popup__image-container">
+    <div class="popup__cantainer popup__image-container">
     <button class="popup__close-button" type="reset">
         <img class="popup__close-button-image" src="./images/close__icon.svg" alt="Закрыть">
       </button>
@@ -87,16 +106,30 @@
       <h3 class="popup__image-title">#</h3>
     </div>
   </div>
+  <div class="popup popup_type_delete-image">
+    <div class="popup__cantainer popup__delete-image">
+      <button class="popup__close-button" type="reset">
+        <img class="popup__close-button-image" src="./images/close__icon.svg" alt="Закрыть">
+      </button>
+      <div class="popup__container">
+        <h3 class="popup__title">Вы уверены?</h3>
+        <button class="popup__submit-button popup__submit-button_active" type="submit">Да</button>
+      </div>
+    </div>
+  </div>
   <template id="element">
     <div class="element">
       <img src="#" alt="#" class="element__image">
-      <button class="element__delete-button" type="button">
+      <button class="element__delete-button element__delete-button_disabled" type="button">
         <img src="./images/Trash.svg" alt="Удалить"></button>
       <div class="element__description">
         <h3 class="element__title">#</h3>
+        <div class="element__likes">
         <button class="element__like-button" type="button">
           <!--<img src="./images/like__button.svg" alt="Кнопка лайка">-->
         </button>
+        <p class="element__number-of-likes">#</p>
+      </div>
       </div>
     </div>
   </template>
