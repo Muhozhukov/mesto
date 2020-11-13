@@ -64,10 +64,10 @@ export const api = new Api({
 
 let profileId = null;
 //Загрузка карточек с сервера
-api.getInitialCards().then((items) => cardList.renderItems(items))
+api.getInitialCards().then((items) => cardList.renderItems(items)).catch((err) => (console.log(err)))
 //Загрузка информации профиля с сервера
-api.getUserInfo().then((userInf) => {userInfo.setUserInfo(userInf); return profileId = userInf._id}).then(console.log(profileId))
-const myProfileId = api.getUserInfo().then((userInf) => {return profileId = userInf._id})
+api.getUserInfo().then((userInf) => {userInfo.setUserInfo(userInf); return profileId = userInf._id}).catch((err) => (console.log(err)))
+const myProfileId = api.getUserInfo().then((userInf) => {return profileId = userInf._id}).catch((err) => (console.log(err)))
 
 //Функция отрисовки карточек с сервера
 const card = (item) => {
@@ -80,14 +80,14 @@ const card = (item) => {
       deletePopup.setEventListeners(cardId);
       deleteImagePopup.querySelector('.popup__submit-button').addEventListener('click', () => {
         api.deleteCard(cardId)
-        .then(() => {card.deleteCard(); deletePopup.closePopup()})
+        .then(() => {card.deleteCard(); deletePopup.closePopup()}).catch((err) => (console.log(err)))
       })
     },
     likeToCard: (cardId) => {
-      api.likeToCard(cardId).then((res) => {card.likeToCard(res)})
+      api.likeToCard(cardId).then((res) => {card.likeToCard(res)}).catch((err) => (console.log(err)))
     },
     dislikeToCard: (cardId) => {
-      api.deleteLikeToCard(cardId).then((res) => {card.dislikeToCard(res)})
+      api.deleteLikeToCard(cardId).then((res) => {card.dislikeToCard(res)}).catch((err) => (console.log(err)))
     }}
   );
     const cardElement = card.generateCard(myProfileId);
@@ -104,14 +104,14 @@ const newCard = (item) => {
       deletePopup.setEventListeners(cardId);
       deleteImagePopup.querySelector('.popup__submit-button').addEventListener('click', () => {
         api.deleteCard(cardId)
-        .then(() => {card.deleteCard(); deletePopup.closePopup()})
+        .then(() => {card.deleteCard(); deletePopup.closePopup()}).catch((err) => (console.log(err)))
       })
     },
     likeToCard: (cardId) => {
-      api.likeToCard(cardId).then((res) => {card.likeToCard(res)})
+      api.likeToCard(cardId).then((res) => {card.likeToCard(res)}).catch((err) => (console.log(err)))
     },
     dislikeToCard: (cardId) => {
-      api.deleteLikeToCard(cardId).then((res) => {card.dislikeToCard(res)})
+      api.deleteLikeToCard(cardId).then((res) => {card.dislikeToCard(res)}).catch((err) => (console.log(err)))
     }}
   );
     const cardElement = card.generateCard(myProfileId);
@@ -131,6 +131,7 @@ const addCardForm = new PopupWithForm(
   {formSubmitHandler: (item) => {
     api.postNewCard(item)
     .then((item) => newCard(item))
+    .catch((err) => (console.log(err)))
     .finally(() => {addCardForm.renderLoading(false)})
   }
 });
@@ -142,6 +143,7 @@ const editProfileForm = new PopupWithForm(
   {formSubmitHandler: (item) => {
     api.editUserInfo(item)
     .then((item) => userInfo.setUserInfo(item))
+    .catch((err) => (console.log(err)))
     .finally(() => {editProfileForm.renderLoading(false)})
   }}
 )
@@ -153,6 +155,7 @@ const editAvatarForm = new PopupWithForm(
   {formSubmitHandler: (item) => {
     api.changeProfileAvatar(item)
     .then((item) => userInfo.setUserInfo(item))
+    .catch((err) => (console.log(err)))
     .finally(() => {editAvatarForm.renderLoading(false)})
   }}
 )
