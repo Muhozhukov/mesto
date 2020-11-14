@@ -3,17 +3,15 @@ export default class Api {
     this.headers = options.headers;
     this.baseUrl = options.baseUrl;
   }
+  _handleOriginalResponse(res) {
+    if(res.ok) {return res.json()}
+      return Promise.reject(`Ошибка: ${res.status}`);
+  }
   getInitialCards() {
     return fetch(`${this.baseUrl}/cards`, {
       headers: this.headers
     })
-    .then((res) => {
-      if(res.ok) {return res.json()}
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .then((data) => {
-      return data
-    })
+    .then(this._handleOriginalResponse)
     .catch((err) => {
       console.log(err)
     })
@@ -22,13 +20,7 @@ export default class Api {
     return fetch(`${this.baseUrl}/users/me`, {
       headers: this.headers
     })
-    .then((res) => {
-      if(res.ok) {return res.json()}
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .then((data) => {
-      return data
-    })
+    .then(this._handleOriginalResponse)
     .catch((err) => {
       console.log(err)
     })
@@ -42,13 +34,7 @@ export default class Api {
         about: profileInfo.profession
       })
     })
-    .then((res) => {
-      if(res.ok) {return res.json()}
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .then((data) => {
-      return data
-    })
+    .then(this._handleOriginalResponse)
     .catch((err) => {
       console.log(err)
     })
@@ -62,14 +48,7 @@ export default class Api {
         link: newCard.link
       })
     })
-    .then((res) => {
-      if(res.ok) {return res.json()}
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .then((data) => {
-      return data
-      console.log(data)
-    })
+    .then(this._handleOriginalResponse)
     .catch((err) => {
       console.log(err)
     })
@@ -79,13 +58,7 @@ export default class Api {
       method: 'PUT',
       headers: this.headers
     })
-    .then((res) => {
-      if(res.ok) {return res.json()}
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .then((data) => {
-      return data
-    })
+    .then(this._handleOriginalResponse)
     .catch((err) => {
       console.log(err)
     })
@@ -95,13 +68,7 @@ export default class Api {
       method: 'DELETE',
       headers: this.headers
     })
-    .then((res) => {
-      if(res.ok) {return res.json()}
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .then((data) => {
-      return data
-    })
+    .then(this._handleOriginalResponse)
     .catch((err) => {
       console.log(err)
     })
@@ -111,13 +78,7 @@ export default class Api {
       method: 'DELETE',
       headers: this.headers
     })
-    .then((res) => {
-      if(res.ok) {return res.json()}
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .then((data) => {
-      return data
-    })
+    .then(this._handleOriginalResponse)
     .catch((err) => {
       console.log(err)
     })
@@ -130,13 +91,7 @@ export default class Api {
         avatar: newAvatar.avatar
       })
     })
-    .then((res) => {
-      if(res.ok) {return res.json()}
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .then((data) => {
-      return data
-    })
+    .then(this._handleOriginalResponse)
     .catch((err) => {
       console.log(err)
     })

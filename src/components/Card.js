@@ -68,14 +68,14 @@ export class Card {
   deleteCard() {
     this._element.remove()
   }
-  generateCard(myProfileId) {
+  generateCard() {
     this._element = this._getTemplate();
-    //поправить этот РАБОТАЮЩИЙ ужас
+
     const deleteButton = this._element.querySelector('.element__delete-button')
     if (this.owner._id == this._profileId)
     {deleteButton.classList.remove('element__delete-button_disabled')}
     else {deleteButton.classList.add('element__delete-button_disabled')}
-    //вот до сюда
+
     const elementLike = this._element.querySelector('.element__like-button');
     let numberOfLikes = this._element.querySelector('.element__number-of-likes');
     const elementImage = this._element.querySelector('.element__image');
@@ -86,12 +86,11 @@ export class Card {
       numberOfLikes.textContent = this._likes.length;
     } else numberOfLikes.textContent = '';
 
-  //поправить этот РАБОТАЮЩИЙ ужас
     const likeIsMine = this._likes.some((item) => {
       const qwe = item._id == this._profileId
       return qwe
     })
-    //вот до сюда
+
     if (likeIsMine) {
       elementLike.classList.add('element__like-button_active')
     } else {

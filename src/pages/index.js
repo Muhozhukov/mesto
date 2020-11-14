@@ -63,14 +63,23 @@ export const api = new Api({
 });
 
 let profileId = null;
-//Загрузка карточек с сервера
-api.getInitialCards().then((items) => cardList.renderItems(items)).catch((err) => (console.log(err)))
-//Загрузка информации профиля с сервера
-api.getUserInfo().then((userInf) => {userInfo.setUserInfo(userInf); return profileId = userInf._id}).catch((err) => (console.log(err)))
-const myProfileId = api.getUserInfo().then((userInf) => {return profileId = userInf._id}).catch((err) => (console.log(err)))
+Promise.all([
+  //Загрузка информации пользователя
+  api.getUserInfo(),
+  //Загрузка карточек с сервера
+  api.getInitialCards(),
+])
+  .then(([userData, initialCards]) => {
+    profileId = userData._id;
+    userInfo.setUserInfo(userData);
+    cardList.renderItems(initialCards);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 //Функция отрисовки карточек с сервера
-const card = (item) => {
+const createCard = (item, isNewCard) => {
   const card = new Card(
     item, '#element', profileId, {handleCardClick: () => {
       popupImg.openPopup(item);
@@ -90,38 +99,14 @@ const card = (item) => {
       api.deleteLikeToCard(cardId).then((res) => {card.dislikeToCard(res)}).catch((err) => (console.log(err)))
     }}
   );
-    const cardElement = card.generateCard(myProfileId);
-    cardList.addItem(cardElement)
+    const cardElement = card.generateCard();
+    if (isNewCard) {cardList.addNewItem(cardElement)}
+    else {cardList.addItem(cardElement)}
 }
-//Функция отрисовки новой карточки
-const newCard = (item) => {
-  const card = new Card(
-    item, '#element', profileId, {handleCardClick: () => {
-      popupImg.openPopup(item);
-    },
-    handleDeletePopup: (cardId) => {
-      deletePopup.openPopup();
-      deletePopup.setEventListeners(cardId);
-      deleteImagePopup.querySelector('.popup__submit-button').addEventListener('click', () => {
-        api.deleteCard(cardId)
-        .then(() => {card.deleteCard(); deletePopup.closePopup()}).catch((err) => (console.log(err)))
-      })
-    },
-    likeToCard: (cardId) => {
-      api.likeToCard(cardId).then((res) => {card.likeToCard(res)}).catch((err) => (console.log(err)))
-    },
-    dislikeToCard: (cardId) => {
-      api.deleteLikeToCard(cardId).then((res) => {card.dislikeToCard(res)}).catch((err) => (console.log(err)))
-    }}
-  );
-    const cardElement = card.generateCard(myProfileId);
-    cardList.addNewItem(cardElement)
-}
-
 //Инициализация карточек
 const cardList = new Section({
   renderer: (item) => {
-    card(item);
+    createCard(item, false);
   },
 }, elements);
 
@@ -130,7 +115,8 @@ const addCardForm = new PopupWithForm(
   addCardPopup,
   {formSubmitHandler: (item) => {
     api.postNewCard(item)
-    .then((item) => newCard(item))
+    .then((item) => createCard(item, true))
+    .then(addCardForm.closePopup())
     .catch((err) => (console.log(err)))
     .finally(() => {addCardForm.renderLoading(false)})
   }
@@ -143,6 +129,7 @@ const editProfileForm = new PopupWithForm(
   {formSubmitHandler: (item) => {
     api.editUserInfo(item)
     .then((item) => userInfo.setUserInfo(item))
+    .then(editProfileForm.closePopup())
     .catch((err) => (console.log(err)))
     .finally(() => {editProfileForm.renderLoading(false)})
   }}
@@ -155,6 +142,7 @@ const editAvatarForm = new PopupWithForm(
   {formSubmitHandler: (item) => {
     api.changeProfileAvatar(item)
     .then((item) => userInfo.setUserInfo(item))
+    .then(editAvatarForm.closePopup())
     .catch((err) => (console.log(err)))
     .finally(() => {editAvatarForm.renderLoading(false)})
   }}
